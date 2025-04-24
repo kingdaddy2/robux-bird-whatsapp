@@ -14,6 +14,7 @@ const client = new Client({
 client.on('qr', (qr) => {
   console.log('📲 Scan this QR code:');
   qrcode.generate(qr, { small: true });
+  console.log(qr);
 });
 
 client.on('authenticated', () => {
