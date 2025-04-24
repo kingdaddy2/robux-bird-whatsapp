@@ -1,5 +1,7 @@
-FROM node:18
+# Use Node.js base image
+FROM node:18-slim
 
+# Install dependencies for puppeteer and Chromium
 RUN apt-get update && apt-get install -y \
     wget \
     ca-certificates \
@@ -18,15 +20,25 @@ RUN apt-get update && apt-get install -y \
     libxdamage1 \
     libxrandr2 \
     xdg-utils \
-    --no-install-recommends \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    libu2f-udev \
+    libvulkan1 \
+    libdrm2 \
+    --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
+# Set working directory
 WORKDIR /app
 
+# Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
 
+# Copy rest of the project files
 COPY . .
 
-CMD ["npm", "start"]
+# Expose port (optional, only if you're running a server)
+EXPOSE 3000
+
+# Start the app
+CMD ["node", "whatsapp.js"]
