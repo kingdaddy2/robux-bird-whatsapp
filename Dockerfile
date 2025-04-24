@@ -1,7 +1,6 @@
-# Use Node.js base image
 FROM node:18-slim
 
-# Install dependencies for puppeteer and Chromium
+# Install Chromium dependencies
 RUN apt-get update && apt-get install -y \
     wget \
     ca-certificates \
@@ -23,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     libu2f-udev \
     libvulkan1 \
     libdrm2 \
+    libgbm1 \
     --no-install-recommends && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -34,11 +34,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy rest of the project files
+# Copy the rest of the files
 COPY . .
 
-# Expose port (optional, only if you're running a server)
+# Expose port (if needed)
 EXPOSE 3000
 
-# Start the app
+# Start the bot
 CMD ["node", "whatsapp.js"]
