@@ -1,5 +1,5 @@
-const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
+import { Client, LocalAuth } from 'whatsapp-web.js';
+import qrcode from 'qrcode-terminal';
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -36,10 +36,8 @@ client.on('message', async (message) => {
 
 client.initialize();
 
-async function sendVerificationMessage(phoneNumber, code) {
+export async function sendVerificationMessage(phoneNumber, code) {
   const chatId = phoneNumber.replace('+', '') + '@c.us';
   const message = `Your Robux Bird verification code is: *${code}*`;
   await client.sendMessage(chatId, message);
 }
-
-module.exports = { sendVerificationMessage };

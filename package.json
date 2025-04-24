@@ -2,6 +2,7 @@
   "name": "robux-bird-whatsapp",
   "version": "1.0.0",
   "main": "whatsapp.js",
+  "type": "module",
   "scripts": {
     "start": "node whatsapp.js"
   },
