@@ -45,7 +45,7 @@ client.initialize();
 // 🧠 Message sender function
 export async function sendVerificationMessage(phoneNumber, code) {
   const chatId = phoneNumber.replace('+', '') + '@c.us';
-  const message = `Your Robux Bird verification code is: *${code}*`;
+  const message = `Your Wingy Coin verification code is: *${code}*`;
   await client.sendMessage(chatId, message);
 }
 
